@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import Logo from "./Logo";
 
 export default function Header() {
@@ -16,6 +16,18 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
   const navLinks = [
     { href: "#inicio", label: "Inicio" },
@@ -34,8 +46,8 @@ export default function Header() {
       <nav className="px-6 md:px-12 py-4">
         <div className="max-w-[1400px] mx-auto flex justify-between items-center">
           {/* Logo */}
-          <a href="#inicio" className="relative z-10">
-            <Logo variant="header" isScrolled={isScrolled} />
+          <a href="#inicio" className="relative z-50">
+            <Logo variant="header" isScrolled={isScrolled || isMobileMenuOpen} />
           </a>
 
           {/* Desktop Nav */}
@@ -61,7 +73,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden relative z-10 p-2 text-white"
+            className="md:hidden relative z-50 p-2 text-white"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -75,42 +87,89 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`md:hidden fixed inset-0 bg-[#0E0E0E] transition-all duration-500 ${
+        className={`md:hidden fixed inset-0 z-40 transition-all duration-500 ${
           isMobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex flex-col items-center justify-center h-full gap-8">
-          {navLinks.map((link, index) => (
+        {/* Background with gradient */}
+        <div className="absolute inset-0 bg-[#0E0E0E]" />
+
+        {/* Decorative elements */}
+        <div
+          className={`absolute top-0 right-0 w-96 h-96 bg-[#DA2428]/10 rounded-full blur-3xl transition-all duration-700 ${
+            isMobileMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-50"
+          }`}
+          style={{ transform: "translate(30%, -30%)" }}
+        />
+        <div
+          className={`absolute bottom-0 left-0 w-64 h-64 bg-[#DA2428]/5 rounded-full blur-3xl transition-all duration-700 delay-200 ${
+            isMobileMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-50"
+          }`}
+          style={{ transform: "translate(-30%, 30%)" }}
+        />
+
+        {/* Content */}
+        <div className="relative h-full flex flex-col justify-center px-8">
+          {/* Navigation Links */}
+          <nav className="space-y-2">
+            {navLinks.map((link, index) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`group flex items-center justify-between py-4 border-b border-white/10 transition-[transform,opacity] duration-400 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${
+                  isMobileMenuOpen
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-8 opacity-0"
+                }`}
+                style={{ transitionDelay: `${index * 80 + 100}ms` }}
+              >
+                <span className="text-4xl font-semibold text-white group-hover:text-[#DA2428] transition-colors duration-300">
+                  {link.label}
+                </span>
+                <ArrowUpRight
+                  className="w-6 h-6 text-white/30 group-hover:text-[#DA2428] transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                  strokeWidth={1.5}
+                />
+              </a>
+            ))}
+
+            {/* Contact Link - Special styling */}
             <a
-              key={link.href}
-              href={link.href}
+              href="#contacto"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-white text-3xl font-medium hover:text-[#DA2428] transition-colors duration-300"
-              style={{
-                transitionDelay: isMobileMenuOpen ? `${index * 100}ms` : "0ms",
-                transform: isMobileMenuOpen ? "translateY(0)" : "translateY(20px)",
-                opacity: isMobileMenuOpen ? 1 : 0,
-                transition: "all 0.4s ease",
-              }}
+              className={`group flex items-center justify-between py-4 transition-[transform,opacity] duration-400 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${
+                isMobileMenuOpen
+                  ? "translate-x-0 opacity-100"
+                  : "-translate-x-8 opacity-0"
+              }`}
+              style={{ transitionDelay: `${navLinks.length * 80 + 100}ms` }}
             >
-              {link.label}
+              <span className="text-4xl font-semibold text-[#DA2428] group-hover:text-white transition-colors duration-300">
+                Contacto
+              </span>
+              <ArrowUpRight
+                className="w-6 h-6 text-[#DA2428]/50 group-hover:text-white transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                strokeWidth={1.5}
+              />
             </a>
-          ))}
-          <a
-            href="#contacto"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="text-[#DA2428] text-3xl font-medium hover:text-white transition-colors duration-300 mt-4"
-            style={{
-              transitionDelay: isMobileMenuOpen ? "300ms" : "0ms",
-              transform: isMobileMenuOpen ? "translateY(0)" : "translateY(20px)",
-              opacity: isMobileMenuOpen ? 1 : 0,
-              transition: "all 0.4s ease",
-            }}
+          </nav>
+
+          {/* Bottom info */}
+          <div
+            className={`absolute bottom-12 left-8 right-8 transition-[transform,opacity] duration-500 ease-out ${
+              isMobileMenuOpen
+                ? "translate-y-0 opacity-100 delay-500"
+                : "translate-y-5 opacity-0 delay-0"
+            }`}
           >
-            Contacto
-          </a>
+            <div className="flex items-center justify-between text-white/40 text-sm">
+              <span>Inversiones Industriales Ibarra</span>
+              <span>Chile</span>
+            </div>
+          </div>
         </div>
       </div>
     </header>
