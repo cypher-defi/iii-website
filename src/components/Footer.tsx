@@ -57,24 +57,24 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-6">Industrias</h4>
             <ul className="space-y-3 text-[#6B6B6B] text-sm">
               <li>
-                <span className="hover:text-[#DA2428] transition-colors cursor-pointer">
+                <a href="#industria-acero" className="hover:text-[#DA2428] transition-colors">
                   Acero
-                </span>
+                </a>
               </li>
               <li>
-                <span className="hover:text-[#DA2428] transition-colors cursor-pointer">
+                <a href="#industria-cobre" className="hover:text-[#DA2428] transition-colors">
                   Cobre
-                </span>
+                </a>
               </li>
               <li>
-                <span className="hover:text-[#DA2428] transition-colors cursor-pointer">
+                <a href="#industria-cemento" className="hover:text-[#DA2428] transition-colors">
                   Cemento
-                </span>
+                </a>
               </li>
               <li>
-                <span className="hover:text-[#DA2428] transition-colors cursor-pointer">
+                <a href="#industria-cal" className="hover:text-[#DA2428] transition-colors">
                   Cal
-                </span>
+                </a>
               </li>
             </ul>
           </AnimateOnScroll>

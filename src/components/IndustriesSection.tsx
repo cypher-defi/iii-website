@@ -5,6 +5,7 @@ import Image from "next/image";
 import AnimateOnScroll from "./AnimateOnScroll";
 
 interface IndustryBlockProps {
+  id: string;
   tag: string;
   title: string;
   description: string;
@@ -17,6 +18,7 @@ interface IndustryBlockProps {
 }
 
 function IndustryBlock({
+  id,
   tag,
   title,
   description,
@@ -90,6 +92,7 @@ function IndustryBlock({
 
   return (
     <div
+      id={id}
       className={`grid grid-cols-1 lg:grid-cols-2 ${!isLast ? "border-b border-[#333]" : ""}`}
     >
       {reversed ? (
@@ -109,6 +112,7 @@ function IndustryBlock({
 
 const industries = [
   {
+    id: "industria-cal",
     tag: "Ingeniería y Diseño",
     title: "Industria de Cal",
     description:
@@ -122,6 +126,7 @@ const industries = [
     ],
   },
   {
+    id: "industria-cobre",
     tag: "Procesos Hidrometalúrgicos",
     title: "Industria del Cobre",
     description:
@@ -135,6 +140,7 @@ const industries = [
     ],
   },
   {
+    id: "industria-cemento",
     tag: "Materiales Antiabrasivos",
     title: "Industria del Cemento",
     description:
@@ -143,6 +149,7 @@ const industries = [
     imageAlt: "Industria del Cemento",
   },
   {
+    id: "industria-acero",
     tag: "Infraestructura",
     title: "Industria del Acero",
     description:
