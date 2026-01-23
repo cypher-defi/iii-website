@@ -27,7 +27,7 @@ function ServiceCard({
             src={imageSrc}
             alt={imageAlt}
             fill
-            className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+            className="object-cover md:grayscale md:group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
           />
         </div>
         <h3 className="text-xl font-semibold mb-3 group-hover:text-[#DA2428] transition-colors duration-300">
@@ -36,9 +36,12 @@ function ServiceCard({
         <p className="text-[#6B6B6B] mb-6 leading-relaxed text-sm">
           {description}
         </p>
-        <span className="inline-flex items-center text-xs font-semibold uppercase tracking-wider border-b border-[#0E0E0E] pb-0.5 group-hover:border-[#DA2428] group-hover:text-[#DA2428] transition-colors duration-300">
-          Ver detalles
-        </span>
+        <a
+          href="mailto:enrique.ibarra@iii.cl"
+          className="inline-flex items-center text-xs font-semibold uppercase tracking-wider border-b border-[#0E0E0E] pb-0.5 hover:border-[#DA2428] hover:text-[#DA2428] transition-colors duration-300"
+        >
+          Obtener más información
+        </a>
       </div>
     </AnimateOnScroll>
   );
