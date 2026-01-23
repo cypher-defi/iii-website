@@ -20,11 +20,28 @@ export default function Header() {
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
       document.body.style.overflow = "hidden";
     } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
       document.body.style.overflow = "";
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      }
     }
     return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
       document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
@@ -87,7 +104,7 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`md:hidden fixed inset-0 z-40 transition-all duration-500 ${
+        className={`md:hidden fixed inset-0 z-40 h-screen w-screen overflow-hidden transition-all duration-500 ${
           isMobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -111,7 +128,7 @@ export default function Header() {
         />
 
         {/* Content */}
-        <div className="relative h-full flex flex-col justify-center px-8">
+        <div className="relative h-full flex flex-col justify-center px-8 overflow-hidden">
           {/* Navigation Links */}
           <nav className="space-y-2">
             {navLinks.map((link, index) => (
