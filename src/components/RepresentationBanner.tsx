@@ -133,21 +133,13 @@ function CompanyLogo({
       title={name}
     >
       <div className='relative w-full h-full flex items-center justify-center'>
-        {isSvg ? (
-          <img
-            src={logo}
-            alt={name}
-            className='max-h-12 max-w-[120px] w-auto object-contain opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 invert'
-          />
-        ) : (
-          <Image
-            src={logo}
-            alt={name}
-            width={120}
-            height={48}
-            className='max-h-12 w-auto object-contain opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 brightness-0 invert'
-          />
-        )}
+        <Image
+          src={logo}
+          alt={name}
+          width={120}
+          height={48}
+          className={`max-h-12 max-w-30 w-auto object-contain opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 ${isSvg ? 'invert' : 'brightness-0 invert'}`}
+        />
       </div>
     </a>
   )
