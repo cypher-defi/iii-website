@@ -1,14 +1,18 @@
-<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Three "i" icons representing III -->
-  <!-- First i -->
-  <circle cx="6" cy="4" r="3" fill="#DA2428"/>
-  <rect x="3" y="10" width="6" height="18" rx="1" fill="#DA2428"/>
+<svg viewBox="60 60 480 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#DA2428">
+    <circle cx="150" cy="120" r="45" />
+    <rect x="110" y="190" width="80" height="130" />
+    <rect x="90" y="190" width="120" height="25" />
+    <rect x="90" y="295" width="120" height="25" />
 
-  <!-- Second i -->
-  <circle cx="16" cy="4" r="3" fill="#DA2428"/>
-  <rect x="13" y="10" width="6" height="18" rx="1" fill="#DA2428"/>
+    <circle cx="300" cy="120" r="45" />
+    <rect x="260" y="190" width="80" height="130" />
+    <rect x="240" y="190" width="120" height="25" />
+    <rect x="240" y="295" width="120" height="25" />
 
-  <!-- Third i -->
-  <circle cx="26" cy="4" r="3" fill="#DA2428"/>
-  <rect x="23" y="10" width="6" height="18" rx="1" fill="#DA2428"/>
+    <circle cx="450" cy="120" r="45" />
+    <rect x="410" y="190" width="80" height="130" />
+    <rect x="390" y="190" width="120" height="25" />
+    <rect x="390" y="295" width="120" height="25" />
+  </g>
 </svg>
