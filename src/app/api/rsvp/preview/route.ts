@@ -11,7 +11,7 @@ export async function GET() {
 
   const html = `<!DOCTYPE html>
 <html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="${BASE_URL}/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="${BASE_URL}/apple-icon.png"></head>
 <body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
 
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;padding:40px 20px;">
