@@ -1,15 +1,19 @@
-<svg viewBox="60 60 480 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g fill="#DA2428">
+<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#DA2428" rx="80"/>
+  <!-- III logo, white, centered in a 512x512 square -->
+  <g transform="translate(256,256) scale(0.72) translate(-300,-200)" fill="#ffffff">
+    <!-- Left i -->
     <circle cx="150" cy="120" r="45" />
     <rect x="110" y="190" width="80" height="130" />
     <rect x="90" y="190" width="120" height="25" />
     <rect x="90" y="295" width="120" height="25" />
-
+    <!-- Center i -->
     <circle cx="300" cy="120" r="45" />
     <rect x="260" y="190" width="80" height="130" />
     <rect x="240" y="190" width="120" height="25" />
     <rect x="240" y="295" width="120" height="25" />
-
+    <!-- Right i -->
     <circle cx="450" cy="120" r="45" />
     <rect x="410" y="190" width="80" height="130" />
     <rect x="390" y="190" width="120" height="25" />
