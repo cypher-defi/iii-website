@@ -1,30 +1,15 @@
-/**
- * RSVP Invite Blast Script
- * Usage: npx tsx src/scripts/send-invites.ts
- *
- * Fill in the ATTENDEES array below before running.
- * Each entry needs a name and email.
- */
-
-import { Resend } from 'resend'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
+import { NextResponse } from 'next/server'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.iii.cl'
-const SENDER = process.env.SENDER_EMAIL || 'enrique.ibarra@iii.cl'
 
-// ─── ADD YOUR ATTENDEES HERE ─────────────────────────────────────────────────
-const ATTENDEES: { name: string; email: string }[] = [
-  // { name: 'Juan Pérez', email: 'juan.perez@empresa.com' },
-  // { name: 'María González', email: 'maria.gonzalez@empresa.com' },
-]
-// ─────────────────────────────────────────────────────────────────────────────
+export async function GET() {
+  const name = 'Juan Pérez'
+  const email = 'juan.perez@empresa.com'
 
-function buildInviteEmail(name: string, email: string): string {
   const confirmUrl = `${BASE_URL}/api/rsvp?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&status=confirm`
   const declineUrl = `${BASE_URL}/api/rsvp?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&status=decline`
 
-  return `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
@@ -37,7 +22,7 @@ function buildInviteEmail(name: string, email: string): string {
           <!-- HEADER -->
           <tr>
             <td style="background:#0E0E0E;padding:36px 40px;text-align:center;">
-              <img src="https://www.iii.cl/apple-icon.png" width="72" height="72" alt="III" style="border-radius:14px;display:block;margin:0 auto 14px;" />
+              <img src="${BASE_URL}/apple-icon.png" width="72" height="72" alt="III" style="border-radius:14px;display:block;margin:0 auto 14px;" />
               <div style="color:#6b6b6b;font-size:10px;letter-spacing:3px;text-transform:uppercase;">Inversiones Industriales Ibarra</div>
             </td>
           </tr>
@@ -129,7 +114,7 @@ function buildInviteEmail(name: string, email: string): string {
           <!-- FOOTER -->
           <tr>
             <td style="background:#0E0E0E;padding:24px 40px;text-align:center;">
-              <div style="font-size:20px;font-weight:800;color:#ffffff;letter-spacing:6px;margin-bottom:12px;">III</div>
+              <img src="${BASE_URL}/apple-icon.png" width="40" height="40" alt="III" style="border-radius:8px;display:block;margin:0 auto 12px;" />
               <div style="font-size:12px;color:#6b6b6b;line-height:1.8;">
                 Inversiones Industriales Ibarra<br/>
                 <a href="https://www.iii.cl" style="color:#DA2428;text-decoration:none;">www.iii.cl</a>
@@ -146,39 +131,8 @@ function buildInviteEmail(name: string, email: string): string {
 
 </body>
 </html>`
+
+  return new NextResponse(html, {
+    headers: { 'Content-Type': 'text/html' },
+  })
 }
-
-async function main() {
-  if (ATTENDEES.length === 0) {
-    console.error('❌  No attendees found. Fill in the ATTENDEES array in send-invites.ts first.')
-    process.exit(1)
-  }
-
-  console.log(`📨  Sending invites to ${ATTENDEES.length} attendee(s)...\n`)
-
-  for (const attendee of ATTENDEES) {
-    try {
-      const { data, error } = await resend.emails.send({
-        from: `Seminario Técnico III <${SENDER}>`,
-        to: attendee.email,
-        subject: 'Confirmación de asistencia — 1° Seminario Técnico para Cemento y Cal',
-        html: buildInviteEmail(attendee.name, attendee.email),
-      })
-
-      if (error) {
-        console.error(`❌  ${attendee.name} (${attendee.email}): ${error.message}`)
-      } else {
-        console.log(`✓  ${attendee.name} (${attendee.email}) — ID: ${data?.id}`)
-      }
-    } catch (err) {
-      console.error(`❌  ${attendee.name} (${attendee.email}):`, err)
-    }
-
-    // Small delay to respect rate limits
-    await new Promise((r) => setTimeout(r, 200))
-  }
-
-  console.log('\n✅  Done.')
-}
-
-main()
