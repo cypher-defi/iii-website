@@ -61,19 +61,19 @@ export async function GET() {
                 Le agradecemos pueda responder prontamente haciendo clic en uno de los botones a continuación.
               </p>
 
-              <!-- CTA BUTTONS -->
+              <!-- CTA BUTTONS - stacked for equal size on mobile -->
               <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:36px;">
                 <tr>
-                  <td width="48%" align="center" style="padding-right:8px;">
-                    <a href="${confirmUrl}"
-                       style="display:block;background:#DA2428;color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:16px 24px;border-radius:6px;text-align:center;letter-spacing:0.5px;">
-                      ✓&nbsp; Confirmo mi asistencia
+                  <td align="center" style="padding-bottom:12px;">
+                    <a href="${confirmUrl}" style="display:block;background:#DA2428;color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:18px 24px;border-radius:6px;text-align:center;letter-spacing:0.5px;">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:8px;display:inline-block;"><path d="M20 6L9 17L4 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmo mi asistencia
                     </a>
                   </td>
-                  <td width="48%" align="center" style="padding-left:8px;">
-                    <a href="${declineUrl}"
-                       style="display:block;background:#ffffff;color:#6b6b6b;text-decoration:none;font-size:15px;font-weight:600;padding:16px 24px;border-radius:6px;text-align:center;border:2px solid #e5e5e5;letter-spacing:0.5px;">
-                      ✗&nbsp; No podré asistir
+                </tr>
+                <tr>
+                  <td align="center">
+                    <a href="${declineUrl}" style="display:block;background:#ffffff;color:#6b6b6b;text-decoration:none;font-size:15px;font-weight:600;padding:18px 24px;border-radius:6px;text-align:center;border:2px solid #e5e5e5;letter-spacing:0.5px;">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:8px;display:inline-block;"><path d="M18 6L6 18M6 6L18 18" stroke="#9b9b9b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>No podré asistir
                     </a>
                   </td>
                 </tr>
