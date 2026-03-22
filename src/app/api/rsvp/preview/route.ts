@@ -21,9 +21,9 @@ export async function GET() {
 
           <!-- HEADER -->
           <tr>
-            <td style="background:#0E0E0E;padding:36px 40px;text-align:center;">
+            <td style="background:#3A3A3A;padding:36px 40px;text-align:center;">
               <img src="${BASE_URL}/apple-icon.png" width="72" height="72" alt="III" style="border-radius:14px;display:block;margin:0 auto 14px;" />
-              <div style="color:#6b6b6b;font-size:10px;letter-spacing:3px;text-transform:uppercase;">Inversiones Industriales Ibarra</div>
+              <div style="color:#cccccc;font-size:10px;letter-spacing:3px;text-transform:uppercase;">Inversiones Industriales Ibarra</div>
             </td>
           </tr>
 
@@ -34,7 +34,7 @@ export async function GET() {
 
           <!-- EVENT BADGE -->
           <tr>
-            <td style="background:#0E0E0E;padding:18px 40px;text-align:center;">
+            <td style="background:#3A3A3A;padding:18px 40px;text-align:center;">
               <div style="display:inline-block;background:#DA2428;color:#ffffff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 18px;border-radius:3px;">
                 1° Seminario Técnico · Cemento y Cal
               </div>
@@ -45,19 +45,19 @@ export async function GET() {
           <tr>
             <td style="padding:44px 44px 36px;">
 
-              <p style="font-size:15px;color:#4A4A4A;margin:0 0 24px;line-height:1.8;">
+              <p style="font-size:15px;color:#666666;margin:0 0 24px;line-height:1.8;">
                 Estimado/a <strong>${name}</strong>,
               </p>
 
-              <p style="font-size:15px;color:#4A4A4A;margin:0 0 20px;line-height:1.8;">
+              <p style="font-size:15px;color:#666666;margin:0 0 20px;line-height:1.8;">
                 Junto con saludarle, le recordamos que el <strong>1° Seminario Técnico para Cemento y Cal</strong> se llevará a cabo los días <strong>14 y 15 de abril de 2026</strong> en el <strong>DoubleTree by Hilton Hotel Santiago – Vitacura</strong>.
               </p>
 
-              <p style="font-size:15px;color:#4A4A4A;margin:0 0 20px;line-height:1.8;">
+              <p style="font-size:15px;color:#666666;margin:0 0 20px;line-height:1.8;">
                 Con el fin de coordinar adecuadamente los espacios y servicios que el hotel nos brindará, le solicitamos confirmar su asistencia a la brevedad posible. Esto nos permitirá asegurar una correcta planificación y garantizar el buen desarrollo del seminario, evitando cualquier inconveniente.
               </p>
 
-              <p style="font-size:15px;color:#4A4A4A;margin:0 0 36px;line-height:1.8;">
+              <p style="font-size:15px;color:#666666;margin:0 0 36px;line-height:1.8;">
                 Le agradecemos pueda responder prontamente haciendo clic en uno de los botones a continuación.
               </p>
 
@@ -83,19 +83,19 @@ export async function GET() {
               <table width="100%" cellpadding="0" cellspacing="0" style="background:#f9f9f9;border:1px solid #e5e5e5;border-radius:8px;margin-bottom:28px;">
                 <tr>
                   <td style="padding:24px 28px;">
-                    <div style="font-size:11px;font-weight:700;color:#4A4A4A;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;">Detalles del evento</div>
+                    <div style="font-size:11px;font-weight:700;color:#666666;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;">Detalles del evento</div>
                     <table cellpadding="0" cellspacing="0">
                       <tr>
                         <td style="font-size:13px;color:#9b9b9b;padding-bottom:10px;padding-right:16px;white-space:nowrap;">Evento</td>
-                        <td style="font-size:13px;color:#4A4A4A;font-weight:600;padding-bottom:10px;">1° Seminario Técnico para Cemento y Cal</td>
+                        <td style="font-size:13px;color:#666666;font-weight:600;padding-bottom:10px;">1° Seminario Técnico para Cemento y Cal</td>
                       </tr>
                       <tr>
                         <td style="font-size:13px;color:#9b9b9b;padding-bottom:10px;padding-right:16px;white-space:nowrap;">Fecha</td>
-                        <td style="font-size:13px;color:#4A4A4A;font-weight:600;padding-bottom:10px;">14 y 15 de Abril, 2026</td>
+                        <td style="font-size:13px;color:#666666;font-weight:600;padding-bottom:10px;">14 y 15 de Abril, 2026</td>
                       </tr>
                       <tr>
                         <td style="font-size:13px;color:#9b9b9b;padding-right:16px;white-space:nowrap;">Lugar</td>
-                        <td style="font-size:13px;color:#4A4A4A;font-weight:600;">DoubleTree by Hilton Hotel Santiago – Vitacura</td>
+                        <td style="font-size:13px;color:#666666;font-weight:600;">DoubleTree by Hilton Hotel Santiago – Vitacura</td>
                       </tr>
                     </table>
                   </td>
@@ -104,7 +104,7 @@ export async function GET() {
 
               <p style="font-size:14px;color:#6b6b6b;margin:0;line-height:1.8;">
                 Quedamos atentos a sus comentarios.<br/>
-                <span style="color:#4A4A4A;font-weight:600;">Saludos cordiales,</span><br/>
+                <span style="color:#666666;font-weight:600;">Saludos cordiales,</span><br/>
                 Inversiones Industriales Ibarra
               </p>
 
@@ -113,7 +113,7 @@ export async function GET() {
 
           <!-- FOOTER -->
           <tr>
-            <td style="background:#0E0E0E;padding:24px 40px;text-align:center;">
+            <td style="background:#3A3A3A;padding:24px 40px;text-align:center;">
               <img src="${BASE_URL}/apple-icon.png" width="40" height="40" alt="III" style="border-radius:8px;display:block;margin:0 auto 12px;" />
               <div style="font-size:12px;color:#6b6b6b;line-height:1.8;">
                 Inversiones Industriales Ibarra<br/>

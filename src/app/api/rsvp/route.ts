@@ -81,7 +81,7 @@ function buildNotificationHtml({
       .map(
         (e, i) =>
           `<tr style="background:${i % 2 === 0 ? '#f9f9f9' : '#ffffff'}">
-            <td style="padding:10px 14px;font-size:14px;color:#4A4A4A;">${e.name}</td>
+            <td style="padding:10px 14px;font-size:14px;color:#666666;">${e.name}</td>
             <td style="padding:10px 14px;font-size:14px;color:#6b6b6b;">${e.email}</td>
           </tr>`
       )
@@ -92,15 +92,15 @@ function buildNotificationHtml({
 <body style="margin:0;padding:20px;background:#f4f4f4;font-family:Arial,sans-serif;">
   <div style="max-width:580px;margin:0 auto;background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
 
-    <div style="background:#0E0E0E;padding:28px 32px;text-align:center;">
+    <div style="background:#3A3A3A;padding:28px 32px;text-align:center;">
       <img src="https://www.iii.cl/apple-icon.png" width="60" height="60" alt="III" style="border-radius:10px;display:block;margin:0 auto 10px;" />
-      <div style="color:#6b6b6b;font-size:10px;letter-spacing:3px;text-transform:uppercase;">Inversiones Industriales Ibarra</div>
+      <div style="color:#cccccc;font-size:10px;letter-spacing:3px;text-transform:uppercase;">Inversiones Industriales Ibarra</div>
     </div>
 
     <div style="padding:32px;">
       <div style="background:${statusColor}10;border-left:4px solid ${statusColor};padding:18px 20px;border-radius:6px;margin-bottom:28px;">
         <div style="font-size:12px;color:#9b9b9b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Nueva respuesta recibida</div>
-        <div style="font-size:20px;font-weight:700;color:#4A4A4A;">${newEntry.name}</div>
+        <div style="font-size:20px;font-weight:700;color:#666666;">${newEntry.name}</div>
         <div style="font-size:13px;color:#6b6b6b;margin-top:2px;">${newEntry.email}</div>
         <div style="font-size:16px;font-weight:700;color:${statusColor};margin-top:10px;">${statusLabel}</div>
       </div>
@@ -125,7 +125,7 @@ function buildNotificationHtml({
       ${
         confirmed.length > 0
           ? `<div style="margin-bottom:24px;">
-              <div style="font-size:11px;font-weight:700;color:#4A4A4A;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">
+              <div style="font-size:11px;font-weight:700;color:#666666;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">
                 Confirmados (${confirmed.length})
               </div>
               <table style="width:100%;border-collapse:collapse;border:1px solid #e5e5e5;border-radius:6px;overflow:hidden;">
@@ -138,7 +138,7 @@ function buildNotificationHtml({
       ${
         declined.length > 0
           ? `<div>
-              <div style="font-size:11px;font-weight:700;color:#4A4A4A;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">
+              <div style="font-size:11px;font-weight:700;color:#666666;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">
                 Declinados (${declined.length})
               </div>
               <table style="width:100%;border-collapse:collapse;border:1px solid #e5e5e5;border-radius:6px;overflow:hidden;">

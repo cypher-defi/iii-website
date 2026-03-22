@@ -16,7 +16,6 @@ export default async function RsvpPage({ searchParams }: Props) {
   const isConfirm = status === 'confirm'
   const isDecline = status === 'decline'
   const isAlready = status === 'already'
-  const isError = !isConfirm && !isDecline && !isAlready
 
   const content = isConfirm
     ? {
@@ -76,27 +75,23 @@ export default async function RsvpPage({ searchParams }: Props) {
         {/* Header */}
         <div
           style={{
-            background: '#0E0E0E',
+            background: '#3A3A3A',
             padding: '32px',
             textAlign: 'center',
           }}
         >
+          <Image
+            src='/apple-icon.png'
+            width={64}
+            height={64}
+            alt='III'
+            style={{ borderRadius: '10px', display: 'block', margin: '0 auto 12px' }}
+          />
           <div
             style={{
-              fontSize: '32px',
-              fontWeight: 800,
-              color: '#ffffff',
-              letterSpacing: '8px',
-            }}
-          >
-            III
-          </div>
-          <div
-            style={{
-              color: '#6b6b6b',
+              color: '#cccccc',
               fontSize: '10px',
               letterSpacing: '3px',
-              marginTop: '8px',
               textTransform: 'uppercase',
             }}
           >
@@ -130,7 +125,7 @@ export default async function RsvpPage({ searchParams }: Props) {
             style={{
               fontSize: '22px',
               fontWeight: 700,
-              color: '#0E0E0E',
+              color: '#666666',
               textAlign: 'center',
               margin: '0 0 10px',
             }}
@@ -173,7 +168,7 @@ export default async function RsvpPage({ searchParams }: Props) {
               style={{
                 fontSize: '11px',
                 fontWeight: 700,
-                color: '#0E0E0E',
+                color: '#666666',
                 textTransform: 'uppercase',
                 letterSpacing: '2px',
                 marginBottom: '14px',
@@ -183,15 +178,15 @@ export default async function RsvpPage({ searchParams }: Props) {
             </div>
             <div style={{ fontSize: '13px', color: '#6b6b6b', lineHeight: '2' }}>
               <div>
-                <span style={{ color: '#0E0E0E', fontWeight: 600 }}>Evento: </span>
+                <span style={{ color: '#666666', fontWeight: 600 }}>Evento: </span>
                 1° Seminario Técnico para Cemento y Cal
               </div>
               <div>
-                <span style={{ color: '#0E0E0E', fontWeight: 600 }}>Fecha: </span>
+                <span style={{ color: '#666666', fontWeight: 600 }}>Fecha: </span>
                 14 y 15 de Abril, 2026
               </div>
               <div>
-                <span style={{ color: '#0E0E0E', fontWeight: 600 }}>Lugar: </span>
+                <span style={{ color: '#666666', fontWeight: 600 }}>Lugar: </span>
                 DoubleTree by Hilton Santiago – Vitacura
               </div>
             </div>
