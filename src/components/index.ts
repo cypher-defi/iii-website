@@ -4,6 +4,7 @@ export { default as AboutSection } from "./AboutSection";
 export { default as ServicesSection } from "./ServicesSection";
 export { default as IndustriesSection } from "./IndustriesSection";
 export { default as RepresentationBanner } from "./RepresentationBanner";
+export { default as SeminarySection } from "./SeminarySection";
 export { default as ContactSection } from "./ContactSection";
 export { default as Footer } from "./Footer";
 export { default as CookieBanner } from "./CookieBanner";

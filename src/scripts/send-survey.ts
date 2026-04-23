@@ -1,9 +1,6 @@
 /**
- * RSVP Invite Blast Script
- * Usage: npx tsx src/scripts/send-invites.ts
- *
- * Fill in the ATTENDEES array below before running.
- * Each entry needs a name and email.
+ * Survey Email Blast Script
+ * Usage: npx tsx src/scripts/send-survey.ts
  */
 
 import { Resend } from 'resend'
@@ -14,38 +11,39 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.iii.cl'
 const SENDER = process.env.SENDER_EMAIL || 'enrique.ibarra@iii.cl'
 
 // ─── ADD YOUR ATTENDEES HERE ─────────────────────────────────────────────────
-const ATTENDEES: { name: string; email: string }[] = [
-  // ── CLIENTES ─────────────────────────────────────────────────────────────
-  { name: 'Jose Luis Mundaca',     email: 'jose.mundaca@cbb.cl' },
+// ─── CHANGE TO false ONLY AFTER HUMAN APPROVAL ───────────────────────────────
+const SEND_TO_ALL = true
+// ─────────────────────────────────────────────────────────────────────────────
+
+const ALL_ATTENDEES: { name: string; email: string }[] = [
+  // ── CBB ───────────────────────────────────────────────────────────────────
   { name: 'Jose Manuel Sanhueza',  email: 'jose.sanhueza@cbb.cl' },
   { name: 'Patricio Moraga',       email: 'patricio.moraga@cbb.cl' },
-  { name: 'Jaime Valdes',          email: 'jaime.valdes@cbb.cl' },
+  { name: 'Andres Navarrete',      email: 'andres.navarrete@cbb.cl' },
+  { name: 'Miguel Millar',         email: 'miguel.millar@cbb.cl' },
+  // ── MELON CEMENTOS ───────────────────────────────────────────────────────
   { name: 'Daniel Velasquez',      email: 'daniel.velasquez@meloncementos.cl' },
-  { name: 'Joaquin Nash',          email: 'joaquin.nash@melonservicios.cl' },
-  { name: 'Ingrid Soto',           email: 'ingrid.soto@melonservicios.cl' },
-  { name: 'Luis Vasquez',          email: 'luis.vasquez@melonservicios.cl' },
   { name: 'Marvi Jimenez',         email: 'marvi.jimenez@melonservicios.cl' },
   { name: 'Pedro Estay',           email: 'pedro.estay@melonservicios.cl' },
   { name: 'Marco Castillo',        email: 'marcos.castillo@melonservicios.cl' },
-  { name: 'Gaston Guerrero',       email: 'gaston.guerrero@meloncementos.cl' },
   { name: 'Pablo Sandoval',        email: 'pablo.sandoval@meloncementos.cl' },
-  { name: 'Rodrigo Bravo',         email: 'rodrigo.bravo@meloncementos.cl' },
-  { name: 'Tomas Troncoso',        email: 'tomas.troncoso@meloncementos.cl' },
   { name: 'Rodrigo Ogaz',          email: 'rodrigo.ogaz@meloncementos.cl' },
   { name: 'Daniel Garrido',        email: 'daniel.garrido@meloncementos.cl' },
   { name: 'Alejandra Castro',      email: 'alejandra.castro@meloncementos.cl' },
   { name: 'Maria Jesus Palacios',  email: 'maria.palacios@meloncementos.cl' },
   { name: 'Diego Silva',           email: 'diego.silva@meloncementos.cl' },
   { name: 'Nicolas Arnau',         email: 'nicolas.arnau@meloncementos.cl' },
+  // ── POLPAICO SOLUCIONES ──────────────────────────────────────────────────
   { name: 'Gisella Carvajal',      email: 'gisella.carvajal@polpaicosoluciones.cl' },
   { name: 'Matias Agurto',         email: 'matias.agurto@polpaicosoluciones.cl' },
   { name: 'Jesus Henriquez',       email: 'jesus.henriquez@polpaicosoluciones.cl' },
   { name: 'Andrew Moran',          email: 'andrew.moran@polpaicosoluciones.cl' },
   { name: 'Dioniemil Vera',        email: 'dioniemil.vera.osorio@polpaicosoluciones.cl' },
-  { name: 'Fernando Rivas',        email: 'fernando.rivas@polpaicosoluciones.cl' },
-  { name: 'Oscar Rojas',           email: 'oscar.rojas@polpaicosoluciones.cl' },
+  { name: 'Gustavo Olivares',      email: 'gustavo.olivares@polpaicosoluciones.cl' },
+  // ── SOPROCAL ─────────────────────────────────────────────────────────────
   { name: 'Andres Thiers',         email: 'athiers@soprocal.cl' },
   { name: 'Santiago Fadic',        email: 'sfadic@soprocal.cl' },
+  // ── UNACEM ───────────────────────────────────────────────────────────────
   { name: 'Angel Alvarez',         email: 'angel.alvarez@unacem.cl' },
   { name: 'Camilo Jimenez',        email: 'camilo.jimenez@uniconchile.cl' },
   { name: 'Javier Lopez',          email: 'javier.lopez@unacem.cl' },
@@ -54,9 +52,8 @@ const ATTENDEES: { name: string; email: string }[] = [
 ]
 // ─────────────────────────────────────────────────────────────────────────────
 
-function buildInviteEmail(name: string, email: string): string {
-  const confirmUrl = `${BASE_URL}/api/rsvp?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&status=confirm`
-  const declineUrl = `${BASE_URL}/api/rsvp?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&status=decline`
+function buildSurveyEmail(name: string, email: string): string {
+  const surveyUrl = `${BASE_URL}/encuesta?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`
 
   return `<!DOCTYPE html>
 <html lang="es">
@@ -85,7 +82,7 @@ function buildInviteEmail(name: string, email: string): string {
           <tr>
             <td style="background:#3A3A3A;padding:18px 40px;text-align:center;">
               <div style="display:inline-block;background:#DA2428;color:#ffffff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 18px;border-radius:3px;">
-                1° Seminario Técnico · Cemento y Cal
+                Encuesta de Satisfacción · Cemento y Cal
               </div>
             </td>
           </tr>
@@ -99,30 +96,23 @@ function buildInviteEmail(name: string, email: string): string {
               </p>
 
               <p style="font-size:15px;color:#666666;margin:0 0 20px;line-height:1.8;">
-                Junto con saludarle, le recordamos que el <strong>1° Seminario Técnico para Cemento y Cal</strong> se llevará a cabo los días <strong>14 y 15 de abril de 2026</strong> en el <strong>DoubleTree by Hilton Hotel Santiago – Vitacura</strong>.
+                Agradecemos su asistencia al <strong>1° Seminario Técnico para Cemento y Cal</strong>, realizado los días <strong>14 y 15 de abril de 2026</strong>. Esperamos que la experiencia haya sido de gran valor para usted y su equipo.
               </p>
 
               <p style="font-size:15px;color:#666666;margin:0 0 20px;line-height:1.8;">
-                Con el fin de coordinar adecuadamente los espacios y servicios que el hotel nos brindará, le solicitamos confirmar su asistencia a la brevedad posible. Esto nos permitirá asegurar una correcta planificación y garantizar el buen desarrollo del seminario, evitando cualquier inconveniente.
+                Su opinión es fundamental para seguir mejorando. Le solicitamos dedicar unos minutos a completar nuestra encuesta de satisfacción — sus respuestas nos ayudarán a diseñar ediciones aún mejores.
               </p>
 
               <p style="font-size:15px;color:#666666;margin:0 0 36px;line-height:1.8;">
-                Le agradecemos pueda responder prontamente haciendo clic en uno de los botones a continuación.
+                La encuesta toma aproximadamente <strong>5 minutos</strong> en completarse.
               </p>
 
-              <!-- CTA BUTTONS - stacked for equal size on mobile -->
+              <!-- CTA BUTTON -->
               <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:36px;">
                 <tr>
-                  <td align="center" style="padding-bottom:12px;">
-                    <a href="${confirmUrl}" style="display:block;background:#DA2428;color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:18px 24px;border-radius:6px;text-align:center;letter-spacing:0.5px;">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:8px;display:inline-block;"><path d="M20 6L9 17L4 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmo mi asistencia
-                    </a>
-                  </td>
-                </tr>
-                <tr>
                   <td align="center">
-                    <a href="${declineUrl}" style="display:block;background:#ffffff;color:#6b6b6b;text-decoration:none;font-size:15px;font-weight:600;padding:18px 24px;border-radius:6px;text-align:center;border:2px solid #e5e5e5;letter-spacing:0.5px;">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:8px;display:inline-block;"><path d="M18 6L6 18M6 6L18 18" stroke="#9b9b9b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>No podré asistir
+                    <a href="${surveyUrl}" style="display:inline-block;background:#DA2428;color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:18px 48px;border-radius:6px;text-align:center;letter-spacing:0.5px;">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:8px;display:inline-block;"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Completar Encuesta
                     </a>
                   </td>
                 </tr>
@@ -143,8 +133,8 @@ function buildInviteEmail(name: string, email: string): string {
                         <td style="font-size:13px;color:#666666;font-weight:600;padding-bottom:10px;">14 y 15 de Abril, 2026</td>
                       </tr>
                       <tr>
-                        <td style="font-size:13px;color:#9b9b9b;padding-right:16px;white-space:nowrap;">Lugar</td>
-                        <td style="font-size:13px;color:#666666;font-weight:600;">DoubleTree by Hilton Hotel Santiago – Vitacura</td>
+                        <td style="font-size:13px;color:#9b9b9b;padding-right:16px;white-space:nowrap;">Organiza</td>
+                        <td style="font-size:13px;color:#666666;font-weight:600;">Inversiones Industriales Ibarra</td>
                       </tr>
                     </table>
                   </td>
@@ -163,7 +153,7 @@ function buildInviteEmail(name: string, email: string): string {
           <!-- FOOTER -->
           <tr>
             <td style="background:#3A3A3A;padding:24px 40px;text-align:center;">
-              <div style="font-size:20px;font-weight:800;color:#ffffff;letter-spacing:6px;margin-bottom:12px;">III</div>
+              <img src="https://www.iii.cl/apple-icon.png" width="40" height="40" alt="III" style="border-radius:8px;display:block;margin:0 auto 12px;" />
               <div style="font-size:12px;color:#6b6b6b;line-height:1.8;">
                 Inversiones Industriales Ibarra<br/>
                 <a href="https://www.iii.cl" style="color:#DA2428;text-decoration:none;">www.iii.cl</a>
@@ -183,20 +173,24 @@ function buildInviteEmail(name: string, email: string): string {
 }
 
 async function main() {
+  const ATTENDEES = SEND_TO_ALL
+    ? ALL_ATTENDEES
+    : [{ name: 'Enrique Ibarra', email: 'enrique.ibarra@iii.cl' }]
+
   if (ATTENDEES.length === 0) {
-    console.error('❌  No attendees found. Fill in the ATTENDEES array in send-invites.ts first.')
+    console.error('❌  No attendees found.')
     process.exit(1)
   }
 
-  console.log(`📨  Sending invites to ${ATTENDEES.length} attendee(s)...\n`)
+  console.log(`📨  Sending survey emails to ${ATTENDEES.length} attendee(s)...\n`)
 
   for (const attendee of ATTENDEES) {
     try {
       const { data, error } = await resend.emails.send({
         from: `Seminario Técnico III <${SENDER}>`,
         to: attendee.email,
-        subject: 'Invitación: 1° Seminario Técnico para Cemento y Cal – Confirmación de Asistencia',
-        html: buildInviteEmail(attendee.name, attendee.email),
+        subject: 'Encuesta de Satisfacción — 1° Seminario Técnico Cemento y Cal',
+        html: buildSurveyEmail(attendee.name, attendee.email),
       })
 
       if (error) {
@@ -208,7 +202,6 @@ async function main() {
       console.error(`❌  ${attendee.name} (${attendee.email}):`, err)
     }
 
-    // Small delay to respect rate limits
     await new Promise((r) => setTimeout(r, 200))
   }
 

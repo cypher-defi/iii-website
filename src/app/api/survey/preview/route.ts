@@ -1,20 +1,16 @@
-import { Resend } from 'resend'
+import { NextResponse } from 'next/server'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.iii.cl'
-const SENDER = process.env.SENDER_EMAIL || 'enrique.ibarra@iii.cl'
 
-const TEST_RECIPIENTS = [
-  { name: 'Enrique Ibarra', email: 'enrique.ibarra@iii.cl' },
-]
+export async function GET() {
+  const name = 'Juan Pérez'
+  const email = 'juan.perez@empresa.com'
 
-function buildReminderEmail(name: string, email: string): string {
-  const confirmUrl = `${BASE_URL}/api/rsvp?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&status=confirm`
-  const declineUrl = `${BASE_URL}/api/rsvp?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&status=decline`
+  const surveyUrl = `${BASE_URL}/encuesta?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`
 
-  return `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="${BASE_URL}/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="${BASE_URL}/apple-icon.png"></head>
 <body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
 
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;padding:40px 20px;">
@@ -25,7 +21,7 @@ function buildReminderEmail(name: string, email: string): string {
           <!-- HEADER -->
           <tr>
             <td style="background:#3A3A3A;padding:36px 40px;text-align:center;">
-              <img src="https://www.iii.cl/apple-icon.png" width="72" height="72" alt="III" style="border-radius:14px;display:block;margin:0 auto 14px;" />
+              <img src="${BASE_URL}/apple-icon.png" width="72" height="72" alt="III" style="border-radius:14px;display:block;margin:0 auto 14px;" />
               <div style="color:#cccccc;font-size:10px;letter-spacing:3px;text-transform:uppercase;">Inversiones Industriales Ibarra</div>
             </td>
           </tr>
@@ -39,7 +35,7 @@ function buildReminderEmail(name: string, email: string): string {
           <tr>
             <td style="background:#3A3A3A;padding:18px 40px;text-align:center;">
               <div style="display:inline-block;background:#DA2428;color:#ffffff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 18px;border-radius:3px;">
-                Recordatorio · 1° Seminario Técnico · Cemento y Cal
+                Encuesta de Satisfacción · Cemento y Cal
               </div>
             </td>
           </tr>
@@ -53,39 +49,27 @@ function buildReminderEmail(name: string, email: string): string {
               </p>
 
               <p style="font-size:15px;color:#666666;margin:0 0 20px;line-height:1.8;">
-                Junto con saludarle, le escribimos para recordarle que el <strong>1° Seminario Técnico para Cemento y Cal</strong> se llevará a cabo los días <strong>14 y 15 de abril de 2026</strong> en el <strong>DoubleTree by Hilton Hotel Santiago – Vitacura</strong>.
+                Agradecemos su asistencia al <strong>1° Seminario Técnico para Cemento y Cal</strong>, realizado los días <strong>14 y 15 de abril de 2026</strong>. Esperamos que la experiencia haya sido de valor para usted y su equipo.
               </p>
 
               <p style="font-size:15px;color:#666666;margin:0 0 20px;line-height:1.8;">
-                Notamos que aún no hemos recibido su confirmación de asistencia. Con el fin de coordinar adecuadamente los espacios y servicios del hotel, le pedimos confirmar a la brevedad posible.
+                Su opinión es fundamental para seguir mejorando. Le solicitamos dedicar unos minutos a completar nuestra encuesta de satisfacción — sus respuestas nos ayudarán a diseñar ediciones aún mejores.
               </p>
 
               <p style="font-size:15px;color:#666666;margin:0 0 36px;line-height:1.8;">
-                Le agradecemos pueda responder prontamente haciendo clic en uno de los botones a continuación.
+                La encuesta toma aproximadamente <strong>5 minutos</strong> en completarse.
               </p>
 
-              <!-- CTA BUTTONS -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:16px;">
-                <tr>
-                  <td align="center" style="padding-bottom:12px;">
-                    <a href="${confirmUrl}" style="display:block;background:#DA2428;color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:18px 24px;border-radius:6px;text-align:center;letter-spacing:0.5px;">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:8px;display:inline-block;"><path d="M20 6L9 17L4 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmo mi asistencia
-                    </a>
-                  </td>
-                </tr>
+              <!-- CTA BUTTON -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:36px;">
                 <tr>
                   <td align="center">
-                    <a href="${declineUrl}" style="display:block;background:#ffffff;color:#6b6b6b;text-decoration:none;font-size:15px;font-weight:600;padding:18px 24px;border-radius:6px;text-align:center;border:2px solid #e5e5e5;letter-spacing:0.5px;">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:8px;display:inline-block;"><path d="M18 6L6 18M6 6L18 18" stroke="#9b9b9b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>No podré asistir
+                    <a href="${surveyUrl}" style="display:inline-block;background:#DA2428;color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:18px 40px;border-radius:6px;text-align:center;letter-spacing:0.5px;">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:8px;display:inline-block;"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Completar Encuesta
                     </a>
                   </td>
                 </tr>
               </table>
-
-              <!-- NOTE -->
-              <p style="font-size:12px;color:#aaaaaa;text-align:center;margin:0 0 32px;font-style:italic;">
-                Si ya respondió esta invitación, por favor ignore este mensaje.
-              </p>
 
               <!-- EVENT DETAILS BOX -->
               <table width="100%" cellpadding="0" cellspacing="0" style="background:#f9f9f9;border:1px solid #e5e5e5;border-radius:8px;margin-bottom:28px;">
@@ -102,8 +86,8 @@ function buildReminderEmail(name: string, email: string): string {
                         <td style="font-size:13px;color:#666666;font-weight:600;padding-bottom:10px;">14 y 15 de Abril, 2026</td>
                       </tr>
                       <tr>
-                        <td style="font-size:13px;color:#9b9b9b;padding-right:16px;white-space:nowrap;">Lugar</td>
-                        <td style="font-size:13px;color:#666666;font-weight:600;">DoubleTree by Hilton Hotel Santiago – Vitacura</td>
+                        <td style="font-size:13px;color:#9b9b9b;padding-right:16px;white-space:nowrap;">Organiza</td>
+                        <td style="font-size:13px;color:#666666;font-weight:600;">Inversiones Industriales Ibarra</td>
                       </tr>
                     </table>
                   </td>
@@ -122,7 +106,7 @@ function buildReminderEmail(name: string, email: string): string {
           <!-- FOOTER -->
           <tr>
             <td style="background:#3A3A3A;padding:24px 40px;text-align:center;">
-              <img src="https://www.iii.cl/apple-icon.png" width="40" height="40" alt="III" style="border-radius:8px;display:block;margin:0 auto 10px;" />
+              <img src="${BASE_URL}/apple-icon.png" width="40" height="40" alt="III" style="border-radius:8px;display:block;margin:0 auto 12px;" />
               <div style="font-size:12px;color:#6b6b6b;line-height:1.8;">
                 Inversiones Industriales Ibarra<br/>
                 <a href="https://www.iii.cl" style="color:#DA2428;text-decoration:none;">www.iii.cl</a>
@@ -139,18 +123,8 @@ function buildReminderEmail(name: string, email: string): string {
 
 </body>
 </html>`
-}
 
-async function main() {
-  for (const r of TEST_RECIPIENTS) {
-    const { data, error } = await resend.emails.send({
-      from: `Seminario Técnico III <${SENDER}>`,
-      to: r.email,
-      subject: 'Recordatorio: 1° Seminario Técnico para Cemento y Cal – Confirmación Pendiente',
-      html: buildReminderEmail(r.name, r.email),
-    })
-    if (error) console.error(`❌  ${r.name}: ${error.message}`)
-    else console.log(`✓  ${r.name} (${r.email}) — ID: ${data?.id}`)
-  }
+  return new NextResponse(html, {
+    headers: { 'Content-Type': 'text/html' },
+  })
 }
-main()

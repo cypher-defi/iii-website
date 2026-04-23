@@ -1,11 +1,54 @@
+/**
+ * RSVP Reminder Script — only sends to attendees who haven't responded yet
+ * Usage: npx tsx src/scripts/send-reminder.ts
+ */
+
 import { Resend } from 'resend'
+import { Redis } from '@upstash/redis'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+const redis = Redis.fromEnv()
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.iii.cl'
 const SENDER = process.env.SENDER_EMAIL || 'enrique.ibarra@iii.cl'
 
-const TEST_RECIPIENTS = [
-  { name: 'Enrique Ibarra', email: 'enrique.ibarra@iii.cl' },
+const ATTENDEES: { name: string; email: string }[] = [
+  // ── CLIENTES ─────────────────────────────────────────────────────────────
+  { name: 'Jose Luis Mundaca',     email: 'jose.mundaca@cbb.cl' },
+  { name: 'Jose Manuel Sanhueza',  email: 'jose.sanhueza@cbb.cl' },
+  { name: 'Patricio Moraga',       email: 'patricio.moraga@cbb.cl' },
+  { name: 'Jaime Valdes',          email: 'jaime.valdes@cbb.cl' },
+  { name: 'Daniel Velasquez',      email: 'daniel.velasquez@meloncementos.cl' },
+  { name: 'Joaquin Nash',          email: 'joaquin.nash@melonservicios.cl' },
+  { name: 'Ingrid Soto',           email: 'ingrid.soto@melonservicios.cl' },
+  { name: 'Luis Vasquez',          email: 'luis.vasquez@melonservicios.cl' },
+  { name: 'Marvi Jimenez',         email: 'marvi.jimenez@melonservicios.cl' },
+  { name: 'Pedro Estay',           email: 'pedro.estay@melonservicios.cl' },
+  { name: 'Marco Castillo',        email: 'marcos.castillo@melonservicios.cl' },
+  { name: 'Gaston Guerrero',       email: 'gaston.guerrero@meloncementos.cl' },
+  { name: 'Pablo Sandoval',        email: 'pablo.sandoval@meloncementos.cl' },
+  { name: 'Rodrigo Bravo',         email: 'rodrigo.bravo@meloncementos.cl' },
+  { name: 'Tomas Troncoso',        email: 'tomas.troncoso@meloncementos.cl' },
+  { name: 'Rodrigo Ogaz',          email: 'rodrigo.ogaz@meloncementos.cl' },
+  { name: 'Daniel Garrido',        email: 'daniel.garrido@meloncementos.cl' },
+  { name: 'Alejandra Castro',      email: 'alejandra.castro@meloncementos.cl' },
+  { name: 'Maria Jesus Palacios',  email: 'maria.palacios@meloncementos.cl' },
+  { name: 'Diego Silva',           email: 'diego.silva@meloncementos.cl' },
+  { name: 'Nicolas Arnau',         email: 'nicolas.arnau@meloncementos.cl' },
+  { name: 'Gisella Carvajal',      email: 'gisella.carvajal@polpaicosoluciones.cl' },
+  { name: 'Matias Agurto',         email: 'matias.agurto@polpaicosoluciones.cl' },
+  { name: 'Jesus Henriquez',       email: 'jesus.henriquez@polpaicosoluciones.cl' },
+  { name: 'Andrew Moran',          email: 'andrew.moran@polpaicosoluciones.cl' },
+  { name: 'Dioniemil Vera',        email: 'dioniemil.vera.osorio@polpaicosoluciones.cl' },
+  { name: 'Fernando Rivas',        email: 'fernando.rivas@polpaicosoluciones.cl' },
+  { name: 'Oscar Rojas',           email: 'oscar.rojas@polpaicosoluciones.cl' },
+  { name: 'Andres Thiers',         email: 'athiers@soprocal.cl' },
+  { name: 'Santiago Fadic',        email: 'sfadic@soprocal.cl' },
+  { name: 'Angel Alvarez',         email: 'angel.alvarez@unacem.cl' },
+  { name: 'Camilo Jimenez',        email: 'camilo.jimenez@uniconchile.cl' },
+  { name: 'Javier Lopez',          email: 'javier.lopez@unacem.cl' },
+  { name: 'Pedro Berrios',         email: 'pedro.berrios@unacem.cl' },
+  { name: 'Francisco Aguilera',    email: 'francisco.aguilera@unacem.cl' },
 ]
 
 function buildReminderEmail(name: string, email: string): string {
@@ -142,15 +185,45 @@ function buildReminderEmail(name: string, email: string): string {
 }
 
 async function main() {
-  for (const r of TEST_RECIPIENTS) {
-    const { data, error } = await resend.emails.send({
-      from: `Seminario Técnico III <${SENDER}>`,
-      to: r.email,
-      subject: 'Recordatorio: 1° Seminario Técnico para Cemento y Cal – Confirmación Pendiente',
-      html: buildReminderEmail(r.name, r.email),
-    })
-    if (error) console.error(`❌  ${r.name}: ${error.message}`)
-    else console.log(`✓  ${r.name} (${r.email}) — ID: ${data?.id}`)
+  // Fetch all existing responses from Redis
+  const existing = await redis.hgetall('rsvp:responses') as Record<string, string> | null
+  const respondedEmails = new Set(
+    existing ? Object.keys(existing).map(e => e.toLowerCase()) : []
+  )
+
+  // Filter to only non-responders
+  const pending = ATTENDEES.filter(a => !respondedEmails.has(a.email.toLowerCase()))
+
+  if (pending.length === 0) {
+    console.log('✅  Everyone has already responded — no reminders to send.')
+    return
   }
+
+  console.log(`📋  ${respondedEmails.size} already responded, skipping.`)
+  console.log(`📨  Sending reminders to ${pending.length} non-responder(s)...\n`)
+
+  for (const attendee of pending) {
+    try {
+      const { data, error } = await resend.emails.send({
+        from: `Seminario Técnico III <${SENDER}>`,
+        to: attendee.email,
+        subject: 'Recordatorio: 1° Seminario Técnico para Cemento y Cal – Confirmación Pendiente',
+        html: buildReminderEmail(attendee.name, attendee.email),
+      })
+
+      if (error) {
+        console.error(`❌  ${attendee.name} (${attendee.email}): ${error.message}`)
+      } else {
+        console.log(`✓  ${attendee.name} (${attendee.email}) — ID: ${data?.id}`)
+      }
+    } catch (err) {
+      console.error(`❌  ${attendee.name} (${attendee.email}):`, err)
+    }
+
+    await new Promise((r) => setTimeout(r, 200))
+  }
+
+  console.log('\n✅  Done.')
 }
+
 main()

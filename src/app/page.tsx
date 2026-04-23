@@ -5,6 +5,7 @@ import {
   ServicesSection,
   IndustriesSection,
   RepresentationBanner,
+  SeminarySection,
   ContactSection,
   Footer,
   CookieBanner,
@@ -19,6 +20,7 @@ export default function Home() {
       <ServicesSection />
       <IndustriesSection />
       <RepresentationBanner />
+      <SeminarySection />
       <ContactSection />
       <Footer />
       <CookieBanner />
