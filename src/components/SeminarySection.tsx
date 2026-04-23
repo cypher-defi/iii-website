@@ -69,7 +69,7 @@ export default function SeminarySection() {
             </AnimateOnScroll>
 
             <AnimateOnScroll animation="fade-in-up" delay={200}>
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-[#EDEDED]">
+              <div className="grid grid-cols-3 gap-3 md:gap-6 pt-8 border-t border-[#EDEDED]">
                 {stats.map((stat, i) => (
                   <div key={i}>
                     <div className="text-3xl font-semibold text-[#DA2428] tracking-tight mb-1">
@@ -88,8 +88,7 @@ export default function SeminarySection() {
           <div className="lg:col-span-7">
             <AnimateOnScroll animation="fade-in" delay={150}>
               <div
-                className="grid grid-cols-2 grid-rows-2 gap-3"
-                style={{ height: "480px" }}
+                className="grid grid-cols-2 grid-rows-2 gap-3 h-[280px] md:h-[380px] lg:h-[480px]"
               >
                 <div className="row-span-2 relative overflow-hidden">
                   <Image
