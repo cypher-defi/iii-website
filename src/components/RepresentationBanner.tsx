@@ -88,11 +88,6 @@ const partners: Partner[] = [
     name: "Cadersa",
     logo: "/assets/logos/cadersa.png",
     website: "https://www.cadersa.es"
-  },
-  {
-    name: "Tenaris Siderca",
-    logo: "/assets/logos/tenaris-siderca.svg",
-    website: "https://www.tenaris.com/es"
   }
 ]
 
