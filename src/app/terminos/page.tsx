@@ -23,7 +23,7 @@ export default function TerminosPage() {
             <a href="https://www.iii.cl" className="text-[#DA2428] hover:underline">
               https://www.iii.cl
             </a>{" "}
-            (en adelante, el "Sitio Web"). Al acceder y utilizar este Sitio Web,
+            (en adelante, el &quot;Sitio Web&quot;). Al acceder y utilizar este Sitio Web,
             aceptas quedar obligado por los presentes Términos y Condiciones. Si
             no estás de acuerdo con ellos, debes abstenerte de utilizar el Sitio
             Web.
@@ -35,7 +35,7 @@ export default function TerminosPage() {
             </h2>
             <p>
               El Sitio Web es operado por Inversiones Industriales Ibarra (en
-              adelante, "iii"), con domicilio en Chile.
+              adelante, &quot;iii&quot;), con domicilio en Chile.
             </p>
             <p>
               Correo electrónico de contacto:{" "}
@@ -106,7 +106,7 @@ export default function TerminosPage() {
               5. Responsabilidad
             </h2>
             <p>
-              El Sitio Web se proporciona "tal como está". iii no garantiza:
+              El Sitio Web se proporciona &quot;tal como está&quot;. iii no garantiza:
             </p>
             <ul className="list-disc pl-6 space-y-2 mt-4">
               <li>La disponibilidad ininterrumpida del Sitio Web.</li>

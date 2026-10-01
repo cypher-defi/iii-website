@@ -49,21 +49,21 @@ function ServiceCard({
 
 const services = [
   {
-    imageSrc: "/assets/cucharas_de_cobre.png",
+    imageSrc: "/assets/cucharas_de_cobre.webp",
     imageAlt: "Cucharas de Cobre",
     title: "Cucharas de Cobre",
     description:
       "Servicios personalizados que se adaptan a las necesidades específicas para optimizar el proceso industrial.",
   },
   {
-    imageSrc: "/assets/clinker.png",
+    imageSrc: "/assets/clinker.webp",
     imageAlt: "Horno de Clinker",
     title: "Horno de Clinker",
     description:
       "Materiales refractarios diseñados para resistir altas temperaturas y condiciones extremas en industrias.",
   },
   {
-    imageSrc: "/assets/horno_electrico.png",
+    imageSrc: "/assets/horno_electrico.webp",
     imageAlt: "Asesoría Técnica",
     title: "Asesoría Técnica",
     description:
