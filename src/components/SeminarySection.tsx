@@ -16,7 +16,7 @@ const photos = [
 ];
 
 const stats = [
-  { value: "18", label: "Empresas Internacionales" },
+  { value: "17", label: "Empresas Internacionales" },
   { value: "2", label: "Días de Presentaciones Técnicas" },
   { value: "25+", label: "Años de Liderazgo Sectorial" },
 ];
