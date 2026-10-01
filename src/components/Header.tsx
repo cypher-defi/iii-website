@@ -50,6 +50,7 @@ export default function Header() {
     { href: "#inicio", label: "Inicio" },
     { href: "#nosotros", label: "Nosotros" },
     { href: "#industrias", label: "Industrias" },
+    { href: "#partners", label: "Partners" },
   ];
 
   return (

@@ -19,7 +19,7 @@ export default function PrivacidadPage() {
 
         <div className="prose prose-neutral max-w-none text-[#6B6B6B] space-y-8">
           <p>
-            En Inversiones Industriales Ibarra ("iii"), valoramos y respetamos la
+            En Inversiones Industriales Ibarra (&quot;iii&quot;), valoramos y respetamos la
             privacidad de los usuarios del Sitio Web, y nos comprometemos a
             proteger sus datos personales conforme a la legislación chilena
             vigente, en particular la Ley Nº 19.628 sobre Protección de la Vida

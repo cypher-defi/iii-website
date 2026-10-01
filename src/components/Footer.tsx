@@ -44,6 +44,14 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="#partners"
+                  className="hover:text-[#DA2428] transition-colors"
+                >
+                  Partners
+                </a>
+              </li>
+              <li>
+                <a
                   href="#contacto"
                   className="hover:text-[#DA2428] transition-colors"
                 >
@@ -99,7 +107,7 @@ export default function Footer() {
         <AnimateOnScroll animation="fade-in-up" delay={400}>
           <div className="pt-8 border-t border-[#333] flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[#6B6B6B]">
             <div>
-              &copy; 2025 Inversiones Industriales Ibarra. Todos los derechos
+              &copy; 2026 Inversiones Industriales Ibarra. Todos los derechos
               reservados.
             </div>
             <div className="flex gap-4">

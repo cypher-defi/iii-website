@@ -10,12 +10,12 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           <div className="lg:col-span-4">
             <AnimateOnScroll animation="slide-in-left">
-              <h2 className="text-xs font-semibold uppercase tracking-widest text-[#6B6B6B] mb-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#6B6B6B] mb-4">
                 Sobre Nosotros
-              </h2>
-              <h3 className="text-3xl md:text-4xl font-semibold tracking-tight leading-none mb-8 text-[#0E0E0E]">
+              </p>
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-none mb-8 text-[#0E0E0E]">
                 Liderazgo basado en la excelencia.
-              </h3>
+              </h2>
               <div className="w-16 h-1 bg-[#DA2428]"></div>
             </AnimateOnScroll>
           </div>
@@ -61,9 +61,9 @@ export default function AboutSection() {
                   <div className="mb-4 text-[#DA2428] transition-transform duration-300 group-hover:scale-110">
                     <Layers className="w-7 h-7" strokeWidth={1.5} />
                   </div>
-                  <h4 className="text-lg font-semibold mb-2">
+                  <h3 className="text-lg font-semibold mb-2">
                     Integración Tecnológica
-                  </h4>
+                  </h3>
                   <p className="text-[#6B6B6B] leading-relaxed text-sm">
                     Capacidad de integrar tecnologías, servicios y productos de
                     alta calidad representando a empresas líderes globales.
@@ -75,7 +75,7 @@ export default function AboutSection() {
                   <div className="mb-4 text-[#DA2428] transition-transform duration-300 group-hover:scale-110">
                     <Globe className="w-7 h-7" strokeWidth={1.5} />
                   </div>
-                  <h4 className="text-lg font-semibold mb-2">Puente Global</h4>
+                  <h3 className="text-lg font-semibold mb-2">Puente Global</h3>
                   <p className="text-[#6B6B6B] leading-relaxed text-sm">
                     Objetivo de seguir siendo un puente confiable entre la
                     industria local y las mejores soluciones internacionales.

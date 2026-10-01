@@ -117,8 +117,9 @@ const industries = [
     title: "Industria de Cal",
     description:
       "A través de nuestras empresas representadas ofrecemos servicios de ingeniería, diseño y consultoría para plantas de cal, asegurando que cada solución se adapte perfectamente a los requisitos de nuestros clientes.",
-    imageSrc: "/assets/industria_cal.png",
-    imageAlt: "Industria de Cal",
+    imageSrc: "/assets/industria_cal.webp",
+    imageAlt:
+      "Planta de cal con torres de hornos verticales revestidas en chapa metálica, silos y cintas transportadoras junto a una cantera a cielo abierto al atardecer",
     features: [
       "Consultoría especializada",
       "Adaptación de requisitos",
@@ -131,8 +132,9 @@ const industries = [
     title: "Industria del Cobre",
     description:
       "Soluciones de alto nivel para todos los procesos asociados a la producción de cobre, abarcando etapas de fusión, conversión y procesos hidrometalúrgicos. Garantizamos eficiencia y confiabilidad.",
-    imageSrc: "/assets/industria_cobre.png",
-    imageAlt: "Industria del Cobre",
+    imageSrc: "/assets/industria_cobre.webp",
+    imageAlt:
+      "Convertidor de cobre en una fundición vertiendo metal fundido incandescente en una olla, con chispas y estructuras de acero alrededor",
     reversed: true,
     stats: [
       { title: "Fusión", subtitle: "Optimización de etapas" },
@@ -144,9 +146,10 @@ const industries = [
     tag: "Materiales Antiabrasivos",
     title: "Industria del Cemento",
     description:
-      "Amplia gama de soluciones incluyendo quemadores de alta eficiencia, refractarios para hornos, enfriadores y precalentadores. Estas soluciones permiten optimizar la operación y prolongar la vida útil de activos críticos.",
-    imageSrc: "/assets/industria_cemento.png",
-    imageAlt: "Industria del Cemento",
+      "Amplia gama de soluciones incluyendo quemadores de alta eficiencia, refractarios para los equipos, ingeniería, equipos y sistemas para transporte, almacenamiento y manejo de materiales, componentes y partes de fundición de acero, sistemas de dosificación y alimentación de materiales, equipos y sistemas de muestreo, cadenas industriales de acero, sistemas de medición y monitoreo térmico, soluciones para protección contra el desgaste, tecnologías de mantenimiento predictivo y monitoreo industrial, etc.",
+    imageSrc: "/assets/industria_cemento.webp",
+    imageAlt:
+      "Horno rotatorio de una planta de cemento sobre pilares de hormigón junto a la torre de precalentamiento de estructura verde",
   },
   {
     id: "industria-acero",
@@ -154,8 +157,9 @@ const industries = [
     title: "Industria del Acero",
     description:
       "Productos esenciales como refractarios para hornos, cucharas, electrodos de grafito y placas exotérmicas. Aseguramos la continuidad y calidad en la obtención de este metal fundamental para el desarrollo.",
-    imageSrc: "/assets/industria_acero.png",
-    imageAlt: "Industria del Acero",
+    imageSrc: "/assets/industria_acero.webp",
+    imageAlt:
+      "Horno eléctrico de una acería con electrodos de grafito y acero fundido incandescente lanzando chispas dentro de la nave industrial",
     reversed: true,
     isLast: true,
   },

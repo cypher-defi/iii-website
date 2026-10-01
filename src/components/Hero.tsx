@@ -8,7 +8,7 @@ export default function Hero() {
     >
       {/* Background Image */}
       <Image
-        src="/assets/hero_section.png"
+        src="/assets/hero_section.webp"
         alt=""
         fill
         className="object-cover opacity-40"

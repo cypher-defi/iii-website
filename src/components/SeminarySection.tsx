@@ -16,14 +16,18 @@ const photos = [
 ];
 
 const stats = [
-  { value: "10", label: "Empresas Internacionales" },
+  { value: "18", label: "Empresas Internacionales" },
   { value: "2", label: "Días de Presentaciones Técnicas" },
   { value: "25+", label: "Años de Liderazgo Sectorial" },
 ];
 
 export default function SeminarySection() {
   return (
-    <section className="py-24 px-6 md:px-12 bg-white">
+    <section
+      id="seminario"
+      aria-labelledby="seminario-heading"
+      className="py-24 px-6 md:px-12 bg-white"
+    >
       <div className="max-w-[1400px] mx-auto">
 
         {/* Top layout: text left + photo mosaic right */}
@@ -32,12 +36,15 @@ export default function SeminarySection() {
           {/* Text column */}
           <div className="lg:col-span-5 flex flex-col justify-center">
             <AnimateOnScroll animation="slide-in-left">
-              <h2 className="text-xs font-semibold uppercase tracking-widest text-[#DA2428] mb-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#DA2428] mb-4">
                 Eventos Recientes
-              </h2>
-              <h3 className="text-3xl md:text-4xl font-semibold tracking-tight leading-none mb-2 text-[#0E0E0E]">
+              </p>
+              <h2
+                id="seminario-heading"
+                className="text-3xl md:text-4xl font-semibold tracking-tight leading-none mb-2 text-[#0E0E0E]"
+              >
                 Seminario Internacional
-              </h3>
+              </h2>
               <p className="text-xl md:text-2xl font-medium text-[#6B6B6B] tracking-tight mb-6">
                 Industria del Cemento y la Cal
               </p>
